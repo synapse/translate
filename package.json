@@ -1,0 +1,38 @@
+{
+  "name": "@translations/framework",
+  "version": "0.1.0",
+  "description": "Lightweight string translation with interpolation, plurals, and locale maintainer scripts",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "scripts",
+    "locales"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "add:translation": "node scripts/add-translation.mjs",
+    "sync:locales": "node scripts/sync-locales.mjs",
+    "check:locales": "node scripts/check-locales.mjs",
+    "demo": "node scripts/demo-translations.mjs"
+  },
+  "keywords": [
+    "i18n",
+    "translation",
+    "intl"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.5"
+  }
+}
