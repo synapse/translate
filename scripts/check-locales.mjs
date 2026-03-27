@@ -1,16 +1,13 @@
 #!/usr/bin/env node
 import { readFileSync, existsSync } from "node:fs";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { join } from "node:path";
 import { parseArgs } from "node:util";
 
 import {
   listMissingPaths,
   listStrayTopLevelKeys,
 } from "../dist/locale-merge.js";
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const localesDir = join(__dirname, "..", "locales");
+import { resolveLocalesDir } from "./resolve-locales-dir.mjs";
 
 function loadJson(path) {
   if (!existsSync(path)) return {};
@@ -40,6 +37,7 @@ async function main() {
     return;
   }
 
+  const localesDir = resolveLocalesDir();
   const fromPath = join(localesDir, `${fromLang}.json`);
   const source = loadJson(fromPath);
 

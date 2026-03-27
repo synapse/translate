@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { join } from "node:path";
 import { createInterface } from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
 
@@ -9,13 +8,11 @@ import {
   collectLeafStrings,
   findSimilarStrings,
 } from "../dist/similarity.js";
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const localesDir = join(__dirname, "..", "locales");
+import { resolveLocalesDir } from "./resolve-locales-dir.mjs";
 
 const KEY_RE = /^[A-Za-z0-9_ ]+$/;
 
-function loadLocale(lang) {
+function loadLocale(lang, localesDir) {
   const file = join(localesDir, `${lang}.json`);
   if (!existsSync(file)) {
     mkdirSync(localesDir, { recursive: true });
@@ -67,9 +64,10 @@ async function main() {
       break;
     }
 
+    const localesDir = resolveLocalesDir();
     const file = join(localesDir, `${lang}.json`);
     mkdirSync(localesDir, { recursive: true });
-    const data = loadLocale(lang);
+    const data = loadLocale(lang, localesDir);
 
     if (Object.prototype.hasOwnProperty.call(data, key)) {
       console.error(`Key "${key}" already exists in ${lang}.json.`);

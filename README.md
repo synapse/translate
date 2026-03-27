@@ -52,6 +52,37 @@ npm run build
 
 Source language defaults to `--from en`. Run `npm run build` before `demo` if `dist/` is missing.
 
+**Where JSON files live:** Scripts read and write **`locales/` under the current working directory** (the folder from which you run the command). In an app that depends on this package, run them from your **project root** so your `locales/en.json` is used—not the copy inside `node_modules`.
+
+**Using scripts from another project (after `npm install` and `npm run build` in this repo, or publish the package with `dist/` included):**
+
+1. **Wrappers in your `package.json`** (run from your app root):
+
+   ```json
+   {
+     "scripts": {
+       "i18n:add": "node node_modules/@translations/framework/scripts/add-translation.mjs",
+       "i18n:sync": "node node_modules/@translations/framework/scripts/sync-locales.mjs",
+       "i18n:check": "node node_modules/@translations/framework/scripts/check-locales.mjs",
+       "i18n:search": "node node_modules/@translations/framework/scripts/search-translations.mjs"
+     }
+   }
+   ```
+
+   If your package name differs, adjust the path to `node_modules/<your-package-name>/scripts/...`.
+
+2. **`npx` / `bin`** — This package exposes **`translations-search`**, **`translations-add`**, **`translations-sync`**, **`translations-check`**, **`translations-demo`**. From your app root:
+
+   ```bash
+   npx translations-search -- hello en 0
+   ```
+
+3. **Custom folder** — set `TRANSLATIONS_LOCALES_DIR` to a path (absolute or relative to `process.cwd()`):
+
+   ```bash
+   TRANSLATIONS_LOCALES_DIR=./src/i18n/locales npx translations-search -- hello en 0
+   ```
+
 ## Tests
 
 ```bash

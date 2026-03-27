@@ -7,13 +7,12 @@
  * locale you pass to `setTranslations`. The table below matches `locale: "ar"`.
  */
 import { readFileSync, existsSync } from "node:fs";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { join } from "node:path";
 
 import { setTranslations, t } from "../dist/index.js";
+import { resolveLocalesDir } from "./resolve-locales-dir.mjs";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const enPath = join(__dirname, "..", "locales", "en.json");
+const enPath = join(resolveLocalesDir(), "en.json");
 
 const fromFile = existsSync(enPath)
   ? JSON.parse(readFileSync(enPath, "utf8"))

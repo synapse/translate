@@ -11,6 +11,13 @@
       "import": "./dist/index.js"
     }
   },
+  "bin": {
+    "translations-add": "./scripts/add-translation.mjs",
+    "translations-sync": "./scripts/sync-locales.mjs",
+    "translations-check": "./scripts/check-locales.mjs",
+    "translations-search": "./scripts/search-translations.mjs",
+    "translations-demo": "./scripts/demo-translations.mjs"
+  },
   "files": [
     "dist",
     "scripts",

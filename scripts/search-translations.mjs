@@ -10,14 +10,11 @@
  *   node scripts/search-translations.mjs "hello world" en 0
  */
 import { readFileSync, existsSync } from "node:fs";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { join } from "node:path";
 import { parseArgs } from "node:util";
 
 import { searchTranslationMatches } from "../dist/similarity.js";
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const localesDir = join(__dirname, "..", "locales");
+import { resolveLocalesDir } from "./resolve-locales-dir.mjs";
 
 function loadJson(path) {
   if (!existsSync(path)) {
@@ -65,6 +62,7 @@ async function main() {
     return;
   }
 
+  const localesDir = resolveLocalesDir();
   const path = join(localesDir, `${lang}.json`);
   const data = loadJson(path);
   if (data === null) return;
