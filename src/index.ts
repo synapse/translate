@@ -18,7 +18,10 @@ export type { Segment, ParamValues } from "./interpolation.js";
 export {
   tokenize,
   jaccardSimilarity,
+  scoreToPercent,
   collectLeafStrings,
+  scoreMatchesForLeaves,
+  searchTranslationMatches,
   findSimilarStrings,
 } from "./similarity.js";
 export type { LeafEntry, SimilarMatch } from "./similarity.js";

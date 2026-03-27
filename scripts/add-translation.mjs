@@ -92,7 +92,7 @@ async function main() {
     if (similar.length > 0) {
       console.log("\nSimilar existing strings (word overlap, Jaccard %):");
       for (const s of similar) {
-        const pct = (s.score * 100).toFixed(1);
+        const pct = s.percent.toFixed(1);
         const snippet =
           s.text.length > 80 ? `${s.text.slice(0, 77)}...` : s.text;
         console.log(`  ${pct}% — [${s.path}] ${snippet}`);

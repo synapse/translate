@@ -23,6 +23,7 @@
     "add:translation": "node scripts/add-translation.mjs",
     "sync:locales": "node scripts/sync-locales.mjs",
     "check:locales": "node scripts/check-locales.mjs",
+    "search:translations": "node scripts/search-translations.mjs",
     "demo": "node scripts/demo-translations.mjs"
   },
   "keywords": [
